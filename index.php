@@ -17,34 +17,11 @@
 </head>
 
 <body>
-    <header>
-        <div class="logo">
-            <!-- <h1 class="logo-text"><span>МО</span></h1> -->
-            <h1 class="logo-text"><span>МО ДОСААФ РОССИИ</span> по Боградскому району РХ</h1>
-        </div>
-        <i class="fa fa-bars menu-toggle"></i>
-        <ul class="nav">
-            <li><a href="#">Главная</a></li>
-            <li><a href="#">Сведения о МО ДОСААФ</a></li>
-            <!-- <li><a href="#">МО ДОСААФ</a></li>
-            <li><a href="#">Общая информация по организации</a></li> -->
-            <!-- <li><a href="#">Фотоальбомы</a></li> -->
-            <li><a href="#">Информация для поступающих</a></li>
-            <!-- <li><a href="#">Регистрация</a></li>
-            <li><a href="#">Авторизация</a></li> -->
-            <li>
-                <a href="#">
-                    <i class="fa fa-user"></i>
-                    ДОСААФ
-                    <i class="fa fa-chevron-down" style="font-size: .8em;"></i>
-                </a>
-                <ul>
-                    <li><a href="#">dashboard</a></li>
-                    <li><a href="#" class="logout">Выйти</a></li>
-                </ul>
-            </li>
-        </ul>
-    </header>
+    <!-- Header -->
+    <?php
+        require "blocks/header.php";
+    ?>
+    <!-- /Header -->
 
     <!-- Page Wrapper -->
     <div class="page-wrapper">
@@ -113,7 +90,7 @@
             <div class="main-content">
                 <h1 class="recent-post-title">Недавние новости</h1>
 
-                <div class="post">
+                <div class="post clearfix">
                     <img src="img/2022-05-10_20-39-30.png" alt="" class="post-image">
                     <div class="post-preview">
                         <h2><a href="single.html">sdfas dd gjhdh jtyddhgdf gsdfhsd hj</a></h1>
@@ -130,16 +107,16 @@
 
                 </div>
 
-                <div class="post">
+                <div class="post clearfix">
                     <img src="img/2022-05-10_20-39-30.png" alt="" class="post-image">
                     <div class="post-preview">
-                        <h2><a href="single.html">sdfas dd gjhdh jtyddhgdf gsdfhsd hj</a></h1>
+                        <h2><a href="single.html">sdfas dd gjhdh jtsd fsd fs fsaf sad fsdgdf hgfgh jhgyddhgdf gsdfhsd hj</a></h1>
                             <i class="far fa-user">MO DOSAAF</i>
                             &nbsp;
                             <i class="far fa-calendar">14.05.2022</i>
                             <p class="preview-text">
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa suscipit excepturi
-                                corporis.
+                                corporis. asdf as fsa f sf saf as fas fas fas fs f sdf sadf sad fs fs dfsd fsd f
                                 Mollitia, corporis cupiditate?
                             </p>
                             <a href="single.html" class="btn read-more">Подробнее</a>
@@ -147,7 +124,7 @@
 
                 </div>
 
-                <div class="post">
+                <div class="post clearfix">
                     <img src="img/2022-05-10_20-39-30.png" alt="" class="post-image">
                     <div class="post-preview">
                         <h2><a href="single.html">sdfas dd gjhdh jtyddhgdf gsdfhsd hj</a></h1>
@@ -193,62 +170,9 @@
     <!-- /Page Wrapper -->
 
     <!-- footer -->
-    <div class="footer">
-        <div class="footer-content">
-            <div class="footer-section about">
-                <h1 class="logo-text"><span>МО ДОСААФ РОССИИ</span> по Боградскому району РХ</h1>
-                <p>
-                    asdfasdfasd fasdf sadf asdf asd fasdg asg dfhfghfgdh dfgh fdghdf gdfg
-                </p>
-                <div class="contact">
-                    <span><i class="fas fa-phone"></i> &nbsp; 8-(390)-34-</span><br>
-                    <span><i class="fas fa-envelope"></i> &nbsp; dosaaf@yandex.ru</span>
-                </div>
-                <!-- <div class="socials">
-                    <a href="#"><i class="fab fa-facebook"></i></a>
-                    <a href="#"><i class="fab fa-instagram"></i></a>
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-youtube"></i></a>
-                </div> -->
-            </div>
-            <div class="footer-section links">
-                <h2>Ссылки</h2>
-                <br>
-                <ul>
-                    <a href="#">
-                        <li>События</li>
-                    </a>
-                    <a href="#">
-                        <li>Сотрудники</li>
-                    </a>
-                    <a href="#">
-                        <li>Фотогалерея</li>
-                    </a>
-                    <a href="#">
-                        <li>Условия использования</li>
-                    </a>
-                    <a href="#">
-                        <li>События</li>
-                    </a>
-                </ul>
-            </div>
-            <div class="footer-section contact-form">
-                <h2>Свяжитесь с нами</h2>
-                <br>
-                <form action="index.html" method="post">
-                    <input type="text" name="email" class="text-input contact-input" placeholder="Введите Ваш e-mail...">
-                    <textarea rows="4" name="message" class="text-input contact-input" placeholder="Введите Ваше сообщение..."></textarea>
-                    <button type="submit" class="btn btn-big contact-btn">
-                        <i class="fas fa-envelope"></i>
-                        Отправить
-                    </button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            &copy; Designed by Artem Mal'tsev
-        </div>
-    </div>
+    <?php
+        require "blocks/footer.php"; 
+    ?>
     <!-- /footer -->
 
 
