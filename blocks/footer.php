@@ -8,8 +8,8 @@
     <script src="https://kit.fontawesome.com/cb0649ed49.js" crossorigin="anonymous"></script>
 
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Candal&display=swap" rel="stylesheet">
-    <link href="https: //fonts.googleapis.com/css2?family= Montserrat: wght @100 & display=swap" rel="stylesheet">
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Candal&display=swap" rel="stylesheet"> -->
+    <!-- <link href="https: //fonts.googleapis.com/css2?family= Montserrat: wght @100 & display=swap" rel="stylesheet"> -->
     <!-- Custom Styling -->
     <link rel="stylesheet" href="css/style.css">
     <title>ДОСААФ</title>

@@ -8,9 +8,6 @@
     <!-- Font Awesom -->
     <script src="https://kit.fontawesome.com/cb0649ed49.js" crossorigin="anonymous"></script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Candal&display=swap" rel="stylesheet">
-    <link href="https: //fonts.googleapis.com/css2?family= Montserrat: wght @100 & display=swap" rel="stylesheet">
     <!-- Custom Styling -->
     <link rel="stylesheet" href="css/style.css">
     <title>ДОСААФ</title>
@@ -28,9 +25,9 @@
         <li><a href="#">Общая информация по организации</a></li> -->
         <!-- <li><a href="#">Фотоальбомы</a></li> -->
         <li><a href="#">Информация для поступающих</a></li>
-        <!-- <li><a href="#">Регистрация</a></li>
-        <li><a href="#">Авторизация</a></li> -->
-        <li>
+        <li><a href="#">Регистрация</a></li>
+        <li><a href="#">Авторизация</a></li>
+        <!-- <li>
             <a href="#">
                 <i class="fa fa-user"></i>
                 ДОСААФ
@@ -40,6 +37,6 @@
                 <li><a href="#">dashboard</a></li>
                 <li><a href="#" class="logout">Выйти</a></li>
             </ul>
-        </li>
+        </li> -->
     </ul>
 </header>
