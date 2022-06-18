@@ -1,3 +1,14 @@
+<?php 
+include("path.php"); 
+include(ROOT_PATH . '/app/controllers/posts.php'); 
+?>
+<?php
+if (isset($_GET['id'])) {
+    $post = selectOne('posts', ['id' => $_GET['id']]);
+}
+$topics = selectAll('topics');
+$posts = selectAll('posts', ['published' => 1]);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,18 +19,15 @@
     <!-- Font Awesom -->
     <script src="https://kit.fontawesome.com/cb0649ed49.js" crossorigin="anonymous"></script>
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Candal&display=swap" rel="stylesheet">
-    <link href="https: //fonts.googleapis.com/css2?family= Montserrat: wght @100 & display=swap" rel="stylesheet">
     <!-- Custom Styling -->
-    <link rel="stylesheet" href="css/style.css">
-    <title>Пост</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <title><?php echo $post['title']; ?></title>
 </head>
 
 <body>
     <!-- Header -->
     <?php
-    require "blocks/header.php";
+    include(ROOT_PATH . "/app/includes/header.php");
     ?>
     <!-- /Header -->
 
@@ -33,27 +41,10 @@
             <div class="main-content single">
                 <div class="main-content-wrapper">
 
-                    <h1 class="post-title">Это заголовок поста</h1>
+                    <h1 class="post-title"><?php echo $post['title']; ?></h1>
 
                     <div class="post-content">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde voluptate similique quas quibusdam architecto?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae dolorum nisi eos? Aliquam rerum sint aperiam dolore maxime, nostrum mollitia eos similique, qui suscipit quidem corrupti, nam quo fugit nihil!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem nostrum error nesciunt, ad quae omnis sunt eaque excepturi labore laudantium expedita vero voluptatem reiciendis, est id nobis velit obcaecati vel cumque? Voluptatibus officiis qui rem sunt perferendis libero consectetur facere!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde voluptate similique quas quibusdam architecto?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae dolorum nisi eos? Aliquam rerum sint aperiam dolore maxime, nostrum mollitia eos similique, qui suscipit quidem corrupti, nam quo fugit nihil!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem nostrum error nesciunt, ad quae omnis sunt eaque excepturi labore laudantium expedita vero voluptatem reiciendis, est id nobis velit obcaecati vel cumque? Voluptatibus officiis qui rem sunt perferendis libero consectetur facere!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde voluptate similique quas quibusdam architecto?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae dolorum nisi eos? Aliquam rerum sint aperiam dolore maxime, nostrum mollitia eos similique, qui suscipit quidem corrupti, nam quo fugit nihil!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem nostrum error nesciunt, ad quae omnis sunt eaque excepturi labore laudantium expedita vero voluptatem reiciendis, est id nobis velit obcaecati vel cumque? Voluptatibus officiis qui rem sunt perferendis libero consectetur facere!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde voluptate similique quas quibusdam architecto?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae dolorum nisi eos? Aliquam rerum sint aperiam dolore maxime, nostrum mollitia eos similique, qui suscipit quidem corrupti, nam quo fugit nihil!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem nostrum error nesciunt, ad quae omnis sunt eaque excepturi labore laudantium expedita vero voluptatem reiciendis, est id nobis velit obcaecati vel cumque? Voluptatibus officiis qui rem sunt perferendis libero consectetur facere!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde voluptate similique quas quibusdam architecto?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae dolorum nisi eos? Aliquam rerum sint aperiam dolore maxime, nostrum mollitia eos similique, qui suscipit quidem corrupti, nam quo fugit nihil!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem nostrum error nesciunt, ad quae omnis sunt eaque excepturi labore laudantium expedita vero voluptatem reiciendis, est id nobis velit obcaecati vel cumque? Voluptatibus officiis qui rem sunt perferendis libero consectetur facere!</p>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos unde voluptate similique quas quibusdam architecto?</p>
-                        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vitae dolorum nisi eos? Aliquam rerum sint aperiam dolore maxime, nostrum mollitia eos similique, qui suscipit quidem corrupti, nam quo fugit nihil!</p>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem nostrum error nesciunt, ad quae omnis sunt eaque excepturi labore laudantium expedita vero voluptatem reiciendis, est id nobis velit obcaecati vel cumque? Voluptatibus officiis qui rem sunt perferendis libero consectetur facere!</p>
+                        <?php echo html_entity_decode($post['body']); ?>
                     </div>
                 </div>
             </div>
@@ -64,53 +55,27 @@
 
                 <div class="section popular">
                     <h2 class="section-title">Популярный</h2>
+                    <?php foreach ($posts as $p) : ?>
+                        <div class="post clearfix">
+                            <img src="<?php echo BASE_URL . '/assets/img/' . $p['image']; ?>" alt="">
+                            <a href="" class="title">
+                                <h4><?php echo $p['title']; ?></h4>
+                            </a>
+                        </div>
+                    <?php endforeach; ?>
 
-                    <div class="post clearfix">
-                        <img src="img/2022-05-10_20-39-30.png" alt="">
-                        <a href="" class="title">
-                            <h4>Как победить свой страх</h4>
-                        </a>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="img/2022-05-10_20-39-30.png" alt="">
-                        <a href="" class="title">
-                            <h4>Как победить свой страх</h4></a>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="img/2022-05-10_20-39-30.png" alt="">
-                        <a href="" class="title">
-                            <h4>Как победить свой страх</h4></a>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="img/2022-05-10_20-39-30.png" alt="">
-                        <a href="" class="title">
-                            <h4>Как победить свой страх</h4></a>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="img/2022-05-10_20-39-30.png" alt="">
-                        <a href="" class="title">
-                            <h4>Как победить свой страх</h4></a>
-                    </div>
-
-                    <div class="post clearfix">
-                        <img src="img/2022-05-10_20-39-30.png" alt="">
-                        <a href="" class="title">
-                            <h4>Как победить свой страх</h4></a>
-                    </div>
 
                 </div>
 
                 <div class="section topics">
                     <h2 class="sectiom-title">Темы</h2>
                     <ul>
-                        <li><a href="#">Военно-патриотическое воспитание</a></li>
-                        <li><a href="#">Занятия</a></li>
+                        <?php foreach ($topics as $key => $topic) : ?>
+                            <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
+                        <?php endforeach; ?>
+                        <!-- <li><a href="#">Занятия</a></li>
                         <li><a href="#">Тир</a></li>
-                        <li><a href="#">Курсы ЭВМ</a></li>
+                        <li><a href="#">Курсы ЭВМ</a></li> -->
                     </ul>
                 </div>
 
@@ -124,7 +89,7 @@
 
     <!-- footer -->
     <?php
-    require "blocks/footer.php";
+    include(ROOT_PATH . "/app/includes/footer.php");
     ?>
     <!-- /footer -->
 
@@ -137,7 +102,7 @@
     <!-- /Slick Carousel -->
 
     <!-- Custom Script -->
-    <script src="js/scripts.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 
 </html>

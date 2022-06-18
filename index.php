@@ -1,3 +1,24 @@
+<?php
+include("path.php");
+// include(ROOT_PATH . "/app/database/db.php");
+include(ROOT_PATH . "/app/controllers/topics.php");
+
+$posts = array();
+$postTitle = 'Недавние посты';
+
+if (isset($_GET['t_id'])) {
+    $posts = getPostsByTopicId($_GET['t_id']);
+    $postTitle = 'Посты по теме "' . $_GET['name'] . '"';
+} else if (isset($_POST['search-term'])) {
+    $postTitle = 'Результаты поиска "' . $_POST['search-term'] . '"';
+    $posts = searchPosts($_POST['search-term']);
+    //dd($posts);
+} else {
+    $posts = getPublisedPosts();
+    //dd($posts);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,73 +33,41 @@
     <!-- <link href="https://fonts.googleapis.com/css2?family=Candal&display=swap" rel="stylesheet"> -->
     <!-- <link href="https: //fonts.googleapis.com/css2?family= Montserrat: wght @100 & display=swap" rel="stylesheet"> -->
     <!-- Custom Styling -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css">
     <title>ДОСААФ</title>
 </head>
 
 <body>
     <!-- Header -->
     <?php
-        require "blocks/header.php";
+    include(ROOT_PATH . "/app/includes/header.php");
+    include(ROOT_PATH . "/app/includes/messages.php");
+    // dd($_SESSION);
     ?>
+
     <!-- /Header -->
 
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Post Slider -->
         <div class="post-slider">
-
             <h1 class="slider-title">Популярные публикации</h1>
-
             <i class="fas fa-chevron-left prev"></i>
-
             <i class="fas fa-chevron-right next"></i>
 
             <div class="post-wrapper autoplay">
-                <div class="post">
-                    <img src="img\2022-05-10_20-39-30.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single html">Мой паasfasf asdfasdfjaslfkja shfkjahskgdflkghs dfjghajg sdfjgjdsfhgl
-                                kdfkglksdfhg jdfj;gkjsdf jghd fспорт</a></h4>
-                        <i class="far fa-user">МО ДОСААФ</i>
-                        &nbsp;
-                        <i class="far fa-calendar">14.05.2022</i>
-                    </div>
-                </div>
 
-                <div class="post">
-                    <img src="img\2022-05-10_20-39-30.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single html">Мой паasfasf asdfasdfjaslfkja shfkjahskgdflkghs dfjghajg sdfjgjdsfhgl
-                                kdfkglksdfhg jdfj;gkjsdf jghd fспорт</a></h4>
-                        <i class="far fa-user">МО ДОСААФ</i>
-                        &nbsp;
-                        <i class="far fa-calendar">14.05.2022</i>
+                <?php foreach ($posts as $post) : ?>
+                    <div class="post">
+                        <img class="slider-image" src="<?php echo BASE_URL . '/assets/img/' . $post['image']; ?>" alt="">
+                        <div class="post-info">
+                            <h4><a href="single.php?id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a></h4>
+                            <i class="far fa-user"><?php echo $post['username']; ?></i>
+                            &nbsp;
+                            <i class="far fa-calendar"><?php echo date('j F, Y', strtotime($post['created_at'])); ?></i>
+                        </div>
                     </div>
-                </div>
-
-                <div class="post">
-                    <img src="img\2022-05-10_20-39-30.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single html">Мой паasfasf asdfasdfjaslfkja shfkjahskgdflkghs dfjghajg sdfjgjdsfhgl
-                                kdfkglksdfhg jdfj;gkjsdf jghd fспорт</a></h4>
-                        <i class="far fa-user">МО ДОСААФ</i>
-                        &nbsp;
-                        <i class="far fa-calendar">14.05.2022</i>
-                    </div>
-                </div>
-
-                <div class="post">
-                    <img src="img\2022-05-10_20-39-30.png" alt="" class="slider-image">
-                    <div class="post-info">
-                        <h4><a href="single html">Мой паasfasf asdfasdfjaslfkja shfkjahskgdflkghs dfjghajg sdfjgjdsfhgl
-                                kdfkglksdfhg jdfj;gkjsdf jghd fспорт</a></h4>
-                        <i class="far fa-user">МО ДОСААФ</i>
-                        &nbsp;
-                        <i class="far fa-calendar">14.05.2022</i>
-                    </div>
-                </div>
-
+                <?php endforeach; ?>
             </div>
         </div>
         <!-- /Post Slider -->
@@ -88,58 +77,27 @@
 
             <!-- Main Content -->
             <div class="main-content">
-                <h1 class="recent-post-title">Недавние новости</h1>
-
-                <div class="post clearfix">
-                    <img src="img/2022-05-10_20-39-30.png" alt="" class="post-image">
-                    <div class="post-preview">
-                        <h2><a href="single.html">sdfas dd gjhdh jtyddhgdf gsdfhsd hj</a></h1>
-                            <i class="far fa-user">MO DOSAAF</i>
-                            &nbsp;
-                            <i class="far fa-calendar">14.05.2022</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa suscipit excepturi
-                                corporis.
-                                Mollitia, corporis cupiditate?
-                            </p>
-                            <a href="single.html" class="btn read-more">Подробнее</a>
+                <h1 class="recent-post-title"><?php echo $postTitle; ?></h1>
+                <?php foreach ($posts as $post) : ?>
+                    <div class="post clearfix">
+                        <img class="post-image" src="<?php echo BASE_URL . '/assets/img/' . $post['image']; ?>" alt="">
+                        <div class="post-preview">
+                            <h2><a href="single.php?id=<?php echo $post['id']; ?>"><?php echo $post['title']; ?></a></h1>
+                                <i class="far fa-user"><?php echo $post['username']; ?></i>
+                                &nbsp;
+                                <i class="far fa-calendar"><?php echo date('j F, Y', strtotime($post['created_at'])); ?></i>
+                                <p class="preview-text">
+                                    <?php
+                                    $content = html_entity_decode($post['body']);
+                                    $content = preg_replace("/<img[^>]+\>/i", "", $content); 
+                                    echo (substr($content, 0, 151) . '...');
+                                    // echo preg_replace("/<img[^>]+\>/i", " ", html_entity_decode(substr($post['body'], 0, 151) . '...'));
+                                    ?>
+                                </p>
+                                <a href="single.php?id=<?php echo $post['id']; ?>" class="btn read-more">Подробнее</a>
+                        </div>
                     </div>
-
-                </div>
-
-                <div class="post clearfix">
-                    <img src="img/2022-05-10_20-39-30.png" alt="" class="post-image">
-                    <div class="post-preview">
-                        <h2><a href="single.html">sdfas dd gjhdh jtsd fsd fs fsaf sad fsdgdf hgfgh jhgyddhgdf gsdfhsd hj</a></h1>
-                            <i class="far fa-user">MO DOSAAF</i>
-                            &nbsp;
-                            <i class="far fa-calendar">14.05.2022</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa suscipit excepturi
-                                corporis. asdf as fsa f sf saf as fas fas fas fs f sdf sadf sad fs fs dfsd fsd f
-                                Mollitia, corporis cupiditate?
-                            </p>
-                            <a href="single.html" class="btn read-more">Подробнее</a>
-                    </div>
-
-                </div>
-
-                <div class="post clearfix">
-                    <img src="img/2022-05-10_20-39-30.png" alt="" class="post-image">
-                    <div class="post-preview">
-                        <h2><a href="single.html">sdfas dd gjhdh jtyddhgdf gsdfhsd hj</a></h1>
-                            <i class="far fa-user">MO DOSAAF</i>
-                            &nbsp;
-                            <i class="far fa-calendar">14.05.2022</i>
-                            <p class="preview-text">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa suscipit excepturi
-                                corporis.
-                                Mollitia, corporis cupiditate?
-                            </p>
-                            <a href="single.html" class="btn read-more">Подробнее</a>
-                    </div>
-
-                </div>
+                <?php endforeach; ?>
             </div>
             <!-- /Main Content -->
 
@@ -147,7 +105,7 @@
 
                 <div class="section search">
                     <h2 class="section-title">Поиск</h2>
-                    <form action="index.html" method="post">
+                    <form action="index.php" method="post">
                         <input type="text" name="search-term" class="text-input" placeholder="Поиск...">
                     </form>
                 </div>
@@ -155,10 +113,12 @@
                 <div class="section topics">
                     <h2 class="sectiom-title">Темы</h2>
                     <ul>
-                        <li><a href="#">Военно-патриотическое воспитание</a></li>
-                        <li><a href="#">Занятия</a></li>
+                        <?php foreach ($topics as $key => $topic) : ?>
+                            <li><a href="<?php echo BASE_URL . '/index.php?t_id=' . $topic['id'] . '&name=' . $topic['name']; ?>"><?php echo $topic['name']; ?></a></li>
+                        <?php endforeach; ?>
+                        <!-- <li><a href="#">Занятия</a></li>
                         <li><a href="#">Тир</a></li>
-                        <li><a href="#">Курсы ЭВМ</a></li>
+                        <li><a href="#">Курсы ЭВМ</a></li> -->
                     </ul>
                 </div>
 
@@ -170,23 +130,19 @@
     <!-- /Page Wrapper -->
 
     <!-- footer -->
-    <?php
-        require "blocks/footer.php"; 
-    ?>
+    <?php include(ROOT_PATH . "/app/includes/footer.php"); ?>
     <!-- /footer -->
 
 
     <!-- JQuery -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
-        integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha512-+NqPlbbtM1QqiK8ZAo4Yrj2c4lNQoGv8P79DPtKzj++l5jnN39rHA/xsqn8zE9l0uSoxaCdrOgFs6yjyfbBxSg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
     <!-- Slick Carousel -->
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <!-- /Slick Carousel -->
 
     <!-- Custom Script -->
-    <script src="js/scripts.js"></script>
+    <script src="assets/js/scripts.js"></script>
 </body>
 
 </html>

@@ -1,10 +1,9 @@
 <?php include("../../path.php"); ?>
-<?php include(ROOT_PATH . "/app/controllers/users.php"); 
+<?php include(ROOT_PATH . "/app/controllers/topics.php"); 
 adminOnly();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +15,13 @@ adminOnly();
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Admin Style -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
-    <title>Админка - Добавление пользователя</title>
+    <title>Админка - Редактирование Темы</title>
 </head>
 
 <body>
     <!-- Header -->
     <?php
-    include(ROOT_PATH . "/app/includes/header_admin.php");
+        include(ROOT_PATH . "/app/includes/header_admin.php");
     ?>
     <!-- /Header -->
 
@@ -38,45 +37,25 @@ adminOnly();
         <!-- Admin Content -->
         <div class="admin-content">
             <div class="button-group">
-                <a href="create.php" class="btn btn-big">Добавить пользователя</a>
-                <a href="index.php" class="btn btn-big">Редактировать пользователя</a>
+                <a href="create.php" class="btn btn-big">Добавить тему</a>
+                <a href="index.php" class="btn btn-big">Управление темами</a>
             </div>
 
             <div class="content">
-                <h2 class="page-title">Добавить пользователя</h2>
+                <h2 class="page-title">Редактирование Тему</h2>
                 <?php include(ROOT_PATH . "/app/helpers/formErrors.php");?>
-                <form action="create.php" method="post">
-                    <div>
-                        <label>Логин</label>
-                        <input type="text" value="<?php echo $username; ?>" name="username" class="text-input">
-                    </div>
-
-                    <div>
-                        <label>E-mail</label>
-                        <input type="email" value="<?php echo $email; ?>" name="email" class="text-input">
-                    </div>
-
-                    <div>
-                        <label>Пароль</label>
-                        <input type="password" name="password" class="text-input">
+                <form action="edit.php" method="post">
+                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                <div>
+                        <label>Наименование</label>
+                        <input type="text" name="name" value="<?php echo $name; ?>" class="text-input">
                     </div>
                     <div>
-                        <label>Повторите пароль</label>
-                        <input type="password" name="passwordConf" class="text-input">
+                        <label>Описание</label>
+                        <textarea name="description" value="<?php echo $description; ?>" id="body"></textarea>
                     </div>
                     <div>
-                        <input type="checkbox" name="admin">
-                        <label>Права</label>
-
-                        <!-- <select name="role" class="text-input">
-                            <option value="Author">Автор</option>
-                            <option value="Admin">Админ</option>
-                            <option value="Admin">Пользователь</option>
-                            <option value="Admin">Ученик</option>
-                        </select> -->
-                    </div>
-                    <div>
-                        <button type="submit" name="create-admin" class="btn btn-big">Добавить пользователя</button>
+                        <button type="submit" name="edit-topic" class="btn btn-big">Обновить тему</button>
                     </div>
                 </form>
             </div>
@@ -92,13 +71,13 @@ adminOnly();
 
     <!-- CKEDITOR -->
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script> -->
-    <script src="../../js/ckeditor5/ckeditor.js"></script>
+    <script src="../../assets/js/ckeditor5/ckeditor.js"></script>
     <!-- Custom Script -->
-    <script src="../../js/scripts.js"></script>
+    <script src="../../assets/js/scripts.js"></script>
 
     <script>
         ClassicEditor
-            .create(document.querySelector('#editor'), {
+            .create(document.querySelector('#body'), {
                 toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
                 heading: {
                     options: [{

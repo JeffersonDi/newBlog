@@ -4,7 +4,6 @@ adminOnly();
 ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,13 +15,13 @@ adminOnly();
     <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Admin Style -->
     <link rel="stylesheet" href="../../assets/css/admin.css">
-    <title>Админка - Добавление пользователя</title>
+    <title>Админка - Редактирование пользователя</title>
 </head>
 
 <body>
     <!-- Header -->
     <?php
-    include(ROOT_PATH . "/app/includes/header_admin.php");
+        include(ROOT_PATH . "/app/includes/header_admin.php");
     ?>
     <!-- /Header -->
 
@@ -39,13 +38,14 @@ adminOnly();
         <div class="admin-content">
             <div class="button-group">
                 <a href="create.php" class="btn btn-big">Добавить пользователя</a>
-                <a href="index.php" class="btn btn-big">Редактировать пользователя</a>
+                <a href="index.php" class="btn btn-big">Управление пользователями</a>
             </div>
 
             <div class="content">
-                <h2 class="page-title">Добавить пользователя</h2>
-                <?php include(ROOT_PATH . "/app/helpers/formErrors.php");?>
-                <form action="create.php" method="post">
+                <h2 class="page-title">Редактирование пользователя</h2>
+                <?php include(ROOT_PATH . "/app/helpers/formErrors.php"); ?>
+                <form action="edit.php" method="post">
+                <input type="hidden" value="<?php echo $id; ?>" name="id">
                     <div>
                         <label>Логин</label>
                         <input type="text" value="<?php echo $username; ?>" name="username" class="text-input">
@@ -65,18 +65,14 @@ adminOnly();
                         <input type="password" name="passwordConf" class="text-input">
                     </div>
                     <div>
-                        <input type="checkbox" name="admin">
                         <label>Права</label>
-
-                        <!-- <select name="role" class="text-input">
+                        <select name="role" class="text-input">
                             <option value="Author">Автор</option>
                             <option value="Admin">Админ</option>
-                            <option value="Admin">Пользователь</option>
-                            <option value="Admin">Ученик</option>
-                        </select> -->
+                        </select>
                     </div>
                     <div>
-                        <button type="submit" name="create-admin" class="btn btn-big">Добавить пользователя</button>
+                        <button type="submit" name="update-user" class="btn btn-big">Обновить пользователя</button>
                     </div>
                 </form>
             </div>

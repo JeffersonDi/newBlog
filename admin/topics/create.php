@@ -1,6 +1,9 @@
+<?php include("../../path.php"); ?>
+<?php include(ROOT_PATH . "/app/controllers/topics.php");
+adminOnly();
+ ?>
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -9,16 +12,16 @@
     <script src="https://kit.fontawesome.com/cb0649ed49.js" crossorigin="anonymous"></script>
 
     <!-- Custom Styling -->
-    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../assets/css/style.css">
     <!-- Admin Style -->
-    <link rel="stylesheet" href="../../css/admin.css">
-    <title>Админка - Добавление Тем</title>
+    <link rel="stylesheet" href="../../assets/css/admin.css">
+    <title>Админка - Добавление Темы</title>
 </head>
 
 <body>
     <!-- Header -->
     <?php
-    require "../../blocks/header_admin.php";
+        include(ROOT_PATH . "/app/includes/header_admin.php");
     ?>
     <!-- /Header -->
 
@@ -26,35 +29,32 @@
     <div class="admin-page-wrapper">
 
         <!-- Left sidebar  -->
-        <div class="left-sidebar">
-            <ul>
-                <li><a href="../posts/index.php">Manage Post</a></li>
-                <li><a href="../users/index.php">Manage Users</a></li>
-                <li><a href="index.php">Manage Topics</a></li>
-            </ul>
-        </div>
+        <?php
+        include(ROOT_PATH . "/app/includes/side_bar_admin.php");
+        ?>
         <!-- /Left sidebar  -->
 
         <!-- Admin Content -->
         <div class="admin-content">
             <div class="button-group">
-                <a href="create.php" class="btn btn-big">Добавить</a>
-                <a href="index.php" class="btn btn-big">Редактировать</a>
+                <a href="create.php" class="btn btn-big">Добавить тему</a>
+                <a href="index.php" class="btn btn-big">Управление темами</a>
             </div>
 
             <div class="content">
-                <h2 class="page-title">Add Тему</h2>
+                <h2 class="page-title">Добавить Тему</h2>
+                <?php include(ROOT_PATH . "/app/helpers/formErrors.php");?>
                 <form action="create.php" method="post">
                     <div>
-                        <label>Name</label>
-                        <input type="text" name="name" class="text-input">
+                        <label>Наименование</label>
+                        <input type="text" name="name" value="<?php echo $name; ?>" class="text-input">
                     </div>
                     <div>
                         <label>Описание</label>
-                        <div id="editor"></div>
+                        <textarea name="description" value="<?php echo $description; ?>" id="body"></textarea>
                     </div>
                     <div>
-                        <button type="submit" class="btn btn-big">Добавить тему</button>
+                        <button type="submit" name="add-topic" class="btn btn-big">Добавить тему</button>
                     </div>
                 </form>
             </div>
@@ -70,13 +70,13 @@
 
     <!-- CKEDITOR -->
     <!-- <script src="https://cdn.ckeditor.com/ckeditor5/33.0.0/classic/ckeditor.js"></script> -->
-    <script src="../../js/ckeditor5/ckeditor.js"></script>
+    <script src="../../assets/js/ckeditor5/ckeditor.js"></script>
     <!-- Custom Script -->
-    <script src="../../js/scripts.js"></script>
+    <script src="../../assets/js/scripts.js"></script>
 
     <script>
         ClassicEditor
-            .create(document.querySelector('#editor'), {
+            .create(document.querySelector('#body'), {
                 toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', 'blockQuote'],
                 heading: {
                     options: [{
