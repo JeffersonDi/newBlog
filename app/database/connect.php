@@ -4,10 +4,6 @@ $host = 'localhost';
 $user = 'root';
 $pass = '';
 $db_name = 'db_site_dosaaf';
-// $host = 'localhost';
-// $user = 'admin_dosaaf';
-// $pass = 'hmZgjAZZsv1LmBgG';
-// $db_name = 'dosaaf';
 
 $conn = new MySQLi($host, $user, $pass, $db_name);
 
